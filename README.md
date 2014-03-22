@@ -1,4 +1,6 @@
-# signify - cryptographically sign and verify files
+# signify - sign and verify files
+
+[![Build Status](https://travis-ci.org/nurse/signify.svg)](https://travis-ci.org/nurse/signify)
 
 ## What is signify
 
