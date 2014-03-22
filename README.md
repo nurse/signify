@@ -12,6 +12,8 @@ see [the blog of original author](http://www.tedunangst.com/flak/post/signify)
 * FreeBSD 10.0
 * OS X 10.9
 
+If you confirm another platform or add more platforms, pull requests are welcome.
+
 ## Install
 
 ```sh
