@@ -1,0 +1,11 @@
+language: c
+compiler:
+  - gcc
+  - clang
+
+before_script:
+  - "autoreconf"
+  - "./configure"
+  - "make"
+script:
+  - "make check"
