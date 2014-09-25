@@ -30,8 +30,7 @@ AC_C_VOLATILE
 
 # Checks for library functions.
 AC_FUNC_SELECT_ARGTYPES
-AC_CHECK_FUNCS([bzero getpass memmove memset select strchr strstr])
-AC_REPLACE_FUNCS([strlcpy arc4random timingsafe_bcmp explicit_bzero readpassphrase bcrypt_pbkdf])
+AC_REPLACE_FUNCS([timingsafe_bcmp explicit_bzero bcrypt_pbkdf])
 AC_CACHE_CHECK(whether b64_pton is broken, rb_cv_broken_b64_pton,
   [AC_TRY_RUN([
 #include <netinet/in.h>

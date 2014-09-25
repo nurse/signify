@@ -3,10 +3,7 @@
 
 download() {
   for f in \
-    include/readpassphrase.h \
     include/sha2.h \
-    lib/libc/crypt/arc4random.c \
-    lib/libc/gen/readpassphrase.c \
     lib/libc/hash/sha2.c \
     lib/libc/hash/helper.c \
     lib/libc/net/base64.c \
@@ -32,7 +29,6 @@ download() {
   do
     fetch -o src/${f##*/} 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/src/'$f'?rev=HEAD;content-type=text%2Fplain'
   done
-  mv src/readpassphrase.h src/_readpassphrase.h
   mv src/base64.c src/b64_pton.c
 }
 
@@ -43,7 +39,7 @@ replace() {
     src/$f; \
     rm src/$f.obsd; \
   done
-  for f in signify.c bcrypt_pbkdf.c blf.c readpassphrase.c ; do \
+  for f in signify.c bcrypt_pbkdf.c blf.c ; do \
     sed -i.obsd \
     -e's/<crypto\/blf.h>/<blf.h>/g' \
     -e'/#include <sys\/systm.h>/d' \
