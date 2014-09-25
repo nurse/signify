@@ -11,6 +11,8 @@ download() {
     lib/libc/hash/helper.c \
     lib/libc/net/base64.c \
     lib/libutil/bcrypt_pbkdf.c \
+    lib/libutil/ohash.c \
+    lib/libutil/ohash.h \
     usr.bin/signify/crypto_api.c \
     usr.bin/signify/mod_ed25519.c \
     usr.bin/signify/mod_ge25519.c \
@@ -28,13 +30,19 @@ download() {
     sys/lib/libkern/explicit_bzero.c \
     sys/lib/libkern/timingsafe_bcmp.c
   do
-    fetch -o src/${f##*/} 'http://www.openbsd.org/cgi-bin/cvsweb/src/'$f'?rev=HEAD;content-type=text%2Fplain'
+    fetch -o src/${f##*/} 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/src/'$f'?rev=HEAD;content-type=text%2Fplain'
   done
   mv src/readpassphrase.h src/_readpassphrase.h
   mv src/base64.c src/b64_pton.c
 }
 
 replace() {
+  for f in explicit_bzero.c timingsafe_bcmp.c ; do \
+    sed -i.obsd \
+    -e's/<lib\/libkern\/libkern.h>/<string.h>/g' \
+    src/$f; \
+    rm src/$f.obsd; \
+  done
   for f in signify.c bcrypt_pbkdf.c blf.c readpassphrase.c ; do \
     sed -i.obsd \
     -e's/<crypto\/blf.h>/<blf.h>/g' \
@@ -79,8 +87,6 @@ replace() {
 }' src/readpassphrase.c
   sed -i.obsd -e'/VSTATUS/{N;h;s/.*/#if 0/p;x;p;s/.*/#endif/;}' src/readpassphrase.c
   rm src/readpassphrase.c.obsd
-  patch < build-aux/arc4random.c.patch
-  rm src/arc4random.c.orig
 }
 
 download
