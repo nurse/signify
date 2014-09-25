@@ -6,7 +6,7 @@ EXTRA_signify_SOURCES = helper.c ge25519_base.data
 noinst_HEADERS = blf.h sha2.h crypto_api.h fe25519.h \
 		  ge25519.h missing.h _readpassphrase.h sc25519.h \
 		  chacha_private.h
-CFLAGS += -include missing.h
+AM_CFLAGS += -include missing.h
 
 signify_LDADD = $(LIBOBJS) $(ALLOCA)
 dist_man_MANS = signify.1
